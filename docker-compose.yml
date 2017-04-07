@@ -1,0 +1,33 @@
+version: "3"
+services:
+  db:
+    image: mariadb:latest
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=yoursupersecretpassword
+      - MYSQL_USER=typo3
+      - MYSQL_PASSWORD=yourothersupersecretpassword
+      - MYSQL_DATABASE=typo38
+    command: [mysqld, --character-set-server=utf8, --collation-server=utf8_unicode_ci]
+    volumes:
+      - ./mysql-custom:/etc/mysql/conf.d:ro
+      - ./data:/docker-entrypoint-initdb.d
+    networks:
+      - webapp
+
+  typo3cms:
+    #username: admin
+    #password: yoursupersecretpassword
+    image: flowtek/docker-typo3:8.0
+    container_name: typo3cms
+    ports:
+      - "80:80"
+    volumes:
+      - ./html/typo3conf:/var/www/html/typo3conf
+      - ./html/fileadmin:/var/www/html/fileadmin
+    networks:
+      - webapp
+
+networks:
+  webapp:
+    driver: bridge
