@@ -56,6 +56,12 @@ return [
         'wizard_sortpages' => [
             'packagePath' => 'typo3/sysext/wizard_sortpages/',
         ],
+        'version' => [
+            'packagePath' => 'typo3/sysext/version/',
+        ],
+        'workspaces' => [
+            'packagePath' => 'typo3/sysext/workspaces/',
+        ],
         'about' => [
             'packagePath' => 'typo3/sysext/about/',
         ],
